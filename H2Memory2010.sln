@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H2Memory", "H2Memory2010.csproj", "{45C11D81-EBCB-438D-BD85-E87418EBF981}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H2Memory", "H2Memory.csproj", "{45C11D81-EBCB-438D-BD85-E87418EBF981}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
