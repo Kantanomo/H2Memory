@@ -587,40 +587,37 @@ namespace H2Memory_class
         /// </summary>
         public static int GetPlayerDynamic(H2Memory H2, int index)
         {
-            #region Halo2Vista
-            if (HType == H2Type.Halo2Vista)
+            if (H2.HType == H2Type.Halo2Vista)
             {
                 int TempSight = H2.H2Mem.ReadInt(false, 0x30002B44 + (index * 0x204));
                 if (TempSight != -1 && TempSight != 0)
                     for (int j = 0; j < 2048; j++)
                     {
-                        int DynamicBase = H2.H2Mem.ReadInt(false, 0x3003CF3C + (j * 12) + 8);
+                        int DynamicBase = H2.H2Mem.ReadInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x3003CF3C : 0x3003CAE8) + (j * 12) + 8);
                         int DynamicS = H2.H2Mem.ReadInt(false, DynamicBase + 0x3F8);
                         if (DynamicS == TempSight)
                             return DynamicBase;
                     }
             }
-            #endregion
-            #region H2Server
-            if (HType == H2Type.H2server)
-            {
-                int TempSight = H2.H2Mem.ReadInt(false, 0x300026F0 + (index * 0x204));
-                if (TempSight != -1 && TempSight != 0)
-                    for (int j = 0; j < 2048; j++)
-                    {
-                        int DynamicBase = H2.H2Mem.ReadInt(false, 0x3003CAE8 + (j * 12) + 8);
-                        int DynamicS = H2.H2Mem.ReadInt(false, DynamicBase + 0x3F8);
-                        if (DynamicS == TempSight)
-                            return DynamicBase;
-                    }
-            }
-            #endregion
             return -1;
+        }
+        public static int[] GetWeaponSet(H2Memory H2, Weapon WeaponClass)
+        {
+            List<int> Storage = new List<int>();
+            if (H2.HType == H2Type.Halo2Vista)
+                for (int j = 0; j < 2048; j++)
+                {
+                    int DynamicBase = H2.H2Mem.ReadInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x3003CF3C : 0x3003CAE8) + (j * 12) + 8);
+                    int DynamicS = H2.H2Mem.ReadInt(false, DynamicBase);
+                    if (DynamicS == (int)WeaponClass)
+                        Storage.Add(DynamicBase);
+                }
+            return Storage;
         }
     }
     public class WeaponSet : System.Collections.CollectionBase, System.Collections.IEnumerable
     {
-        public WeaponSet(Weapon WeaponClass)
+        public WeaponSet(H2Memory H2, Weapon WeaponClass)
         {
 
         }
