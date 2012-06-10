@@ -490,7 +490,28 @@ namespace H2Memory_class
         {
             this.H2 = H2;
         }
-
+        /// <summary>
+        /// Checks if the current map is the mainmenu
+        /// </summary>
+        /// <returns>Returns true if the map is mainmenu</returns>
+        public bool MainMenuCheck()
+        {
+            #region Halo2Vista
+            if (HType == H2Type.Halo2Vista)
+            {
+                if (H2Mem.ReadStringUnicode(true, 0x47cf0c, 32) != "mainmenu") return true;
+                else return false;
+            }
+            #endregion
+            #region H2Server
+            if (HType == H2Type.H2server)
+            {
+                if (H2Mem.ReadInt(true, 0x3C40AC) != 3) return true;
+                else return false;
+            }
+            #endregion
+            return false;
+        }
         /// <summary>
         /// Resets the current map to default
         /// </summary>
