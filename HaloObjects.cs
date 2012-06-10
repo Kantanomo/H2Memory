@@ -601,6 +601,9 @@ namespace H2Memory_class
             }
             return -1;
         }
+        /// <summary>
+        /// Gets a List of Offsets for every type of the given weaponclass
+        /// </summary>
         public static int[] GetWeaponSet(H2Memory H2, Weapon WeaponClass)
         {
             List<int> Storage = new List<int>();
