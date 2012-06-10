@@ -627,10 +627,26 @@ namespace H2Memory_class
     {
         public Weapon WeaponClass;
         public int Offset;
-        public WeaponBase(int Offset, Weapon WeaponClass)
+        private H2Memory H2;
+        public WeaponBase(H2Memory H2, int Offset, Weapon WeaponClass)
         {
             this.Offset = Offset;
             this.WeaponClass = WeaponClass;
+            this.H2 = H2;
+        }
+        public short AmmoInClip
+        {
+            get
+            { return H2.H2Mem.ReadShort(false, Offset + 0x22A); }
+            set
+            { H2.H2Mem.WriteShort(false, Offset + 0x22A, value); }
+        }
+        public short AmmoLeft
+        {
+            get
+            { return H2.H2Mem.ReadShort(false, Offset + 0x22C); }
+            set
+            { H2.H2Mem.WriteShort(false, Offset + 0x22C, value); }
         }
     }
 }
