@@ -8,8 +8,14 @@ Weapon Specific
 -Ammo In clip		:Short	:22C	:Perfect Sync
 -Controlling Camera :int :14 :CrashOnChange
 
-
-
 Finding What player has weapon out
 	Take the WeaponBase.ControllingCamera() and compare it to a Player.CameraID() if
 Matched then that player is holding that weapon.
+
+
+
+Vehicle Specific
+-ModelSize(float) = Base + 0xA0
+-AntiGravEnable?(bool) = Base+ 0xAA
+-Freeze(short)    = Base + 0xC0 (0x0041 off 0x0000 on)
+-Action           = Base + 0x138
