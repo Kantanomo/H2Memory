@@ -48,16 +48,6 @@ namespace H2Memory_class
                 H2Mem.WriteInt(false, 0x30005270, 2);
         }
         /// <summary>
-        /// Resets the current map to default
-        /// </summary>
-        public void ResetMap()
-        {
-            if (HType == H2Type.Halo2Vista)
-                H2Mem.WriteInt(false, 0x300056C4, 0);
-            if (HType == H2Type.H2server) // check if correct
-                H2Mem.WriteInt(false, 0x30005270, 0);
-        }
-        /// <summary>
         /// Gets the dynamic player address by index
         /// </summary>
         public int GetPlayerDynamic(int index)
@@ -121,21 +111,6 @@ namespace H2Memory_class
                 return H2Mem.ReadStringUnicode(true, 0x991624, 32);
             #endregion
             return "";
-        }
-        public string CurrentMap()
-        {
-            #region Halo2Vista
-            if (HType == H2Type.Halo2Vista)
-                return H2Mem.ReadStringUnicode(true, 0x47cf0c, 32);
-            #endregion
-            #region H2Server
-            if (HType == H2Type.H2server)
-                if (MainMenuCheck())
-                    return "mainmenu";
-                else
-                    return H2Mem.ReadStringAscii(true, 0x4A2B74, 32);
-            #endregion //NEEDS WORK
-            return string.Empty;
         }
         public bool MainMenuCheck()
         {
@@ -209,39 +184,5 @@ namespace H2Memory_class
                 return H2Mem.ReadStringUnicode(false, 0x52040A, 32);
             return "";
         }
-        #region Camera Stuff
-        public byte GetCameraModifier()
-        {
-            if (H2Mem.ReadByte(true, 0x4a84b0) != 0xE1 && H2Mem.ReadByte(true, 0x4a84b0) != 0x44)
-                return (byte)(H2Mem.ReadByte(true, 0x4a84b2) + 3);
-            else
-                return (byte)(H2Mem.ReadByte(true, 0x4a84b2));
-        }
-        public void ThirdPersonCamMode()
-        {
-            if (GetCameraModifier() != ((byte)0xFF))
-            {
-                H2Mem.WriteMem(0x4a84b0, new byte[3] { 0x44, 0xD1, GetCameraModifier() }, true); //set camera state.
-                H2Mem.WriteByte(true, 0x4a84ae, 1);
-                H2Mem.WriteFloat(true, 0x4A84CC, 1);
-            }
-        }
-        public void NormalCamMode()
-        {
-            if (GetCameraModifier() != ((byte)0xFF))
-            {
-                H2Mem.WriteMem(0x4a84b0, new byte[3] { 0xE1, 0xD7, GetCameraModifier() }, true); //set camera state.
-                H2Mem.WriteByte(true, 0x4a84ae, 0);
-            }
-        }
-        public void StillCamMode()
-        {
-            if (GetCameraModifier() != ((byte)0xFF))
-            {
-                H2Mem.WriteMem(0x4a84b0, new byte[3] { 0x39, 0x80, ((byte)(GetCameraModifier() - 3)) }, true); //set camera state.
-                H2Mem.WriteByte(true, 0x4a84ae, 1);
-            }
-        }
-        #endregion
     }
 }
