@@ -30,3 +30,12 @@ H:\not school stuff\Halo Research\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.
 H:\not school stuff\Halo Research\H2Memory\H2Memory\obj\Debug\ResolveAssemblyReference.cache
 H:\not school stuff\Halo Research\H2Memory\H2Memory\obj\Debug\H2Memory.dll
 H:\not school stuff\Halo Research\H2Memory\H2Memory\obj\Debug\H2Memory.pdb
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Debug\H2Memory.dll
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Debug\H2Memory.pdb
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Debug\Microsoft.DirectX.DirectInput.dll
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Debug\Microsoft.DirectX.dll
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Debug\Microsoft.DirectX.DirectInput.xml
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Debug\Microsoft.DirectX.xml
+C:\Users\when need box\Documents\GitHub\H2Memory\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\when need box\Documents\GitHub\H2Memory\obj\Debug\H2Memory.dll
+C:\Users\when need box\Documents\GitHub\H2Memory\obj\Debug\H2Memory.pdb
