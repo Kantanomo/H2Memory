@@ -154,7 +154,7 @@ namespace H2Memory_class
             #endregion
             return GameState.unknwon;
         }
-        public Player GetPlayerinfo(int index)
+        public Player GetPlayer(int index)
         {
             if (HType == H2Type.Halo2Vista)
                 return new Player(this, index);

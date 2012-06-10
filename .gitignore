@@ -45,6 +45,7 @@ local.properties
 *.sln
 *.cache
 *.sln.docstates.suo
+*.suo
 
 # Build results
 **/[Dd]ebug/
