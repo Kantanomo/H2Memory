@@ -43,6 +43,8 @@ local.properties
 *.user
 *.sln.docstates
 *.sln
+*.cache
+*.sln.docstates.suo
 
 # Build results
 **/[Dd]ebug/
