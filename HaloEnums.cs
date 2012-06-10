@@ -6,6 +6,45 @@ using System.Text;
 namespace H2Memory_class
 {
     #region Enums
+    public enum Weapon : uint
+    {
+        chaingun_turret = 0xE53D2AD8,
+        gauss_turret = 0xE5F02B8B,
+        warthog_horn = 0xE6322BCD,
+        banshee_gun = 0xE6AF2C4A,
+        ghost_gun = 0xE75F2CFA,
+        h_turret_ap = 0xE79B2D36,
+        cannon_turret = 0xE8172DB2,
+        cannon_turret_mp = 0xE8382DD3,
+        big_needler = 0xE8742E0F,
+        mortar_turret = 0xE8D32E6E,
+        minigun_turret = 0xE9062EA1,
+        mortar_turret_mp = 0xE90C2EA7,
+        plasma_turret = 0xE9732F0E,
+        plasma_cannon = 0xE9F62F91,
+        magnum = 0xEAD83073,
+        needler = 0xEB4230DD,
+        plasma_pistol = 0xEB9E3139,
+        battle_rifle = 0xEC3131CC,
+        covenant_carbine = 0xEC673202,
+        plasma_rifle = 0xEC9E3239,
+        shotgun = 0xECD63271,
+        smg = 0xED3F32DA,
+        sniper_rifle = 0xED753310,
+        flak_cannon = 0xEDA2333D,
+        rocket_launcher = 0xEDD4336F,
+        brute_shot = 0xEE0933A4,
+        assault_bomb = 0xEE3433CF,
+        ball = 0xEE5233ED,
+        flag = 0xEE5F33FA,
+        energy_blade = 0xEE7B3416,
+        energy_blade_useless = 0xEE993434,
+        beam_rifle = 0xEE9E3439,
+        brute_plasma_rifle = 0xEED3346E,
+        sentinel_aggressor_beam = 0xEEF1348C,
+        smg_silenced = 0xEF1B34B6,
+        juggernaut_powerup = 0xF33838D2
+    }
     public enum EngineType : byte
     {
         Campaign = 1,
