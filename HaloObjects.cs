@@ -482,12 +482,7 @@ namespace H2Memory_class
         }
         public WeaponBase WeaponOut()
         {
-            foreach (WeaponBase i in new WeaponSet(H2, Weapon.All))
-            {
-                if (BitConverter.ToInt32(i.ControllingCamera, 0) == BitConverter.ToInt32(CameraID, 0))
-                    return i;
-            }
-            return new WeaponBase();
+            return DynamicObjTable.GetPlayerWeaponOut(H2, BitConverter.ToInt32(CameraID,0));
         }
     }
 
@@ -593,8 +588,7 @@ namespace H2Memory_class
         /// </summary>
         public static int GetPlayerDynamic(H2Memory H2, int index)
         {
-            if (H2.HType == H2Type.Halo2Vista)
-            {
+
                 int TempSight = H2.H2Mem.ReadInt(false, 0x30002B44 + (index * 0x204));
                 if (TempSight != -1 && TempSight != 0)
                     for (int j = 0; j < 2048; j++)
@@ -604,7 +598,6 @@ namespace H2Memory_class
                         if (DynamicS == TempSight)
                             return DynamicBase;
                     }
-            }
             return -1;
         }
         /// <summary>
@@ -613,7 +606,6 @@ namespace H2Memory_class
         public static int[] GetWeaponSet(H2Memory H2, Weapon WeaponClass)
         {
             List<int> Storage = new List<int>();
-            if (H2.HType == H2Type.Halo2Vista)
                 for (int j = 0; j < 2048; j++)
                 {
                     int DynamicBase = H2.H2Mem.ReadInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x3003CF3C : 0x3003CAE8) + (j * 12) + 8);
@@ -622,6 +614,20 @@ namespace H2Memory_class
                         Storage.Add(DynamicBase);
                 }
             return Storage.ToArray();
+        }
+        /// <summary>
+        /// Gets the WeaponBase that matches the player camera
+        /// </summary>
+        public static WeaponBase GetPlayerWeaponOut(H2Memory H2, int PlayerCamera)
+        {
+            for (int j = 0; j < 2048; j++)
+            {
+                int DynamicBase = H2.H2Mem.ReadInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x3003CF3C : 0x3003CAE8) + (j * 12) + 8);
+                int DynamicS = H2.H2Mem.ReadInt(false, DynamicBase +0x14);
+                if (DynamicS == PlayerCamera)
+                    return new WeaponBase(H2, DynamicBase);
+            }
+            return new WeaponBase();
         }
     }
     public class WeaponSet : System.Collections.CollectionBase, System.Collections.IEnumerable
