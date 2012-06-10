@@ -480,13 +480,14 @@ namespace H2Memory_class
         {
             Mem.WriteMem(DynamicObjTable.GetPlayerDynamic(H2,this.index / 0x204) + 0x208, new byte[] { 0x01, 0xFE, 0xFE, 0xFF }, false);
         }
-        public Weapon WeaponOut()
+        public WeaponBase WeaponOut()
         {
             foreach (WeaponBase i in new WeaponSet(H2, Weapon.All))
             {
                 if (BitConverter.ToInt32(i.ControllingCamera, 0) == BitConverter.ToInt32(CameraID, 0))
                     return i;
             }
+            return new WeaponBase();
         }
     }
 
@@ -504,16 +505,16 @@ namespace H2Memory_class
         public bool MainMenuCheck()
         {
             #region Halo2Vista
-            if (HType == H2Type.Halo2Vista)
+            if (H2.HType == H2Type.Halo2Vista)
             {
-                if (H2Mem.ReadStringUnicode(true, 0x47cf0c, 32) != "mainmenu") return true;
+                if (H2.H2Mem.ReadStringUnicode(true, 0x47cf0c, 32) != "mainmenu") return true;
                 else return false;
             }
             #endregion
             #region H2Server
-            if (HType == H2Type.H2server)
+            if (H2.HType == H2Type.H2server)
             {
-                if (H2Mem.ReadInt(true, 0x3C40AC) != 3) return true;
+                if (H2.H2Mem.ReadInt(true, 0x3C40AC) != 3) return true;
                 else return false;
             }
             #endregion
@@ -540,7 +541,7 @@ namespace H2Memory_class
             #endregion
             #region H2Server
             if (H2.HType == H2Type.H2server)
-                if (H2.MainMenuCheck())return "mainmenu";
+                if (MainMenuCheck()) return "mainmenu";
                 else return H2.H2Mem.ReadStringAscii(true, 0x4A2B74, 32);
             #endregion //NEEDS WORK
             return string.Empty;
@@ -620,7 +621,7 @@ namespace H2Memory_class
                     if (DynamicS == (int)WeaponClass || WeaponClass == Weapon.All)
                         Storage.Add(DynamicBase);
                 }
-            return Storage;
+            return Storage.ToArray();
         }
     }
     public class WeaponSet : System.Collections.CollectionBase, System.Collections.IEnumerable
@@ -636,6 +637,9 @@ namespace H2Memory_class
         public Weapon WeaponClass;
         public int Offset;
         private H2Memory H2;
+        public WeaponBase()
+        {
+        }
         public WeaponBase(H2Memory H2, int Offset)
         {
             this.Offset = Offset;

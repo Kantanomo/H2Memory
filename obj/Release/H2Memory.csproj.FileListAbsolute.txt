@@ -39,3 +39,12 @@ G:\not school stuff\Halo Research\H2Memory\H2Memory\bin\Release\Microsoft.Direct
 G:\not school stuff\Halo Research\H2Memory\H2Memory\obj\Release\ResolveAssemblyReference.cache
 G:\not school stuff\Halo Research\H2Memory\H2Memory\obj\Release\H2Memory.dll
 G:\not school stuff\Halo Research\H2Memory\H2Memory\obj\Release\H2Memory.pdb
+C:\Users\when need box\Documents\GitHub\H2Memory\obj\Release\ResolveAssemblyReference.cache
+C:\Users\when need box\Documents\GitHub\H2Memory\obj\Release\H2Memory.dll
+C:\Users\when need box\Documents\GitHub\H2Memory\obj\Release\H2Memory.pdb
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Release\H2Memory.dll
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Release\H2Memory.pdb
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Release\Microsoft.DirectX.DirectInput.dll
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Release\Microsoft.DirectX.dll
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Release\Microsoft.DirectX.DirectInput.xml
+C:\Users\when need box\Documents\GitHub\H2Memory\bin\Release\Microsoft.DirectX.xml
