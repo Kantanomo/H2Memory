@@ -15,6 +15,10 @@ namespace H2Memory_class
         public H2Type HType;
         public OpCode OpCodeChanges;
         public bool H2Found = true;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public H2Memory(H2Type Type, bool Message)
         {
             H2Mem = new ProcessMemory(Type);
@@ -32,6 +36,10 @@ namespace H2Memory_class
             HType = Type;
             this.OpCodeChanges = new OpCode(this);
         }
+
+        /// <summary>
+        /// Resets the current round
+        /// </summary>
         public void ResetRound()
         {
             if (HType == H2Type.Halo2Vista)
@@ -39,6 +47,9 @@ namespace H2Memory_class
             if (HType == H2Type.H2server) // check if correct
                 H2Mem.WriteInt(false, 0x30005270, 2);
         }
+        /// <summary>
+        /// Resets the current map to default
+        /// </summary>
         public void ResetMap()
         {
             if (HType == H2Type.Halo2Vista)
@@ -46,9 +57,11 @@ namespace H2Memory_class
             if (HType == H2Type.H2server) // check if correct
                 H2Mem.WriteInt(false, 0x30005270, 0);
         }
-        public int[] GetPlayerDynamic(int index)
+        /// <summary>
+        /// Gets the dynamic player address by index
+        /// </summary>
+        public int GetPlayerDynamic(int index)
         {
-            List<int> Tmp = new List<int>();
             #region Halo2Vista
             if (HType == H2Type.Halo2Vista)
             {
@@ -59,9 +72,8 @@ namespace H2Memory_class
                         int DynamicBase = H2Mem.ReadInt(false, 0x3003CF3C + (j * 12) + 8);
                         int DynamicS = H2Mem.ReadInt(false, DynamicBase + 0x3F8);
                         if (DynamicS == TempSight)
-                            Tmp.Add(DynamicBase);
+                            return DynamicBase;
                     }
-                return Tmp.ToArray();
             }
             #endregion
             #region H2Server
@@ -74,12 +86,11 @@ namespace H2Memory_class
                         int DynamicBase = H2Mem.ReadInt(false, 0x3003CAE8 + (j * 12) + 8);
                         int DynamicS = H2Mem.ReadInt(false, DynamicBase + 0x3F8);
                         if (DynamicS == TempSight)
-                            Tmp.Add(DynamicBase);
+                            return DynamicBase;
                     }
-                return Tmp.ToArray();
             }
             #endregion
-            return new int[1] { -1 };
+            return -1;
         }
         public int GetPlayerCount()
         {

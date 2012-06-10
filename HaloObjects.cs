@@ -293,17 +293,12 @@ namespace H2Memory_class
         {
             get
             {
-                int[] tmp = H2.GetPlayerDynamic(index / 0x204);
-                return Mem.ReadInt(false, tmp[0] + 6364);
+                return Mem.ReadInt(false, H2.GetPlayerDynamic(index / 0x204) + 6364);
             }
             set
             {
-                int[] tmp = H2.GetPlayerDynamic(index / 0x204);
-                for (int i = 0; i < tmp.Length; i++)
-                {
-                    Mem.WriteInt(false, tmp[i] + 6364, value);
-                    Mem.WriteInt(false, tmp[i] + 8906, value);
-                }
+                Mem.WriteInt(false, H2.GetPlayerDynamic(index / 0x204) + 6364, value);
+                Mem.WriteInt(false, H2.GetPlayerDynamic(index / 0x204) + 8906, value);
             }
         }
         /// <summary>
@@ -349,76 +344,58 @@ namespace H2Memory_class
         {
             get
             {
-                int[] tmp = H2.GetPlayerDynamic(index / 0x204);
-                if (tmp.Length != 0)
-                    return Mem.ReadFloat(false, tmp[0] + 0x64);
-                return -1;
+                return Mem.ReadFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x64);
             }
             set
             {
-                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204)[0] + 0x264, value);
+                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x264, value);
             }
         }
         public float YPos
         {
             get
             {
-                int[] tmp = H2.GetPlayerDynamic(index / 0x204);
-                if (tmp.Length != 0)
-                    return Mem.ReadFloat(false, tmp[0] + 0x68);
-                return -1;
+                return Mem.ReadFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x68);
             }
             set
             {
-                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204)[0] + 0x268, value);
+                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x268, value);
             }
         }
         public float ZPos
         {
             get
             {
-                int[] tmp = H2.GetPlayerDynamic(index / 0x204);
-                if (tmp.Length != 0)
-                    return Mem.ReadFloat(false, tmp[0] + 0x6C);
-                return -1;
+                return Mem.ReadFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x6C);
             }
             set
             {
-                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204)[0] + 0x26C, value);
+                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x26C, value);
             }
         }
         public int CurrentPlane
         {
             get
             {
-                int[] tmp = H2.GetPlayerDynamic(index / 0x204);
-                if (tmp.Length != 0)
-                    return Mem.ReadInt(false, tmp[0] + 0x468);
-                return -1;
+                return Mem.ReadInt(false, H2.GetPlayerDynamic(index / 0x204) + 0x468);
             }
         }
         public int CurrentPlane2
         {
             get
             {
-                int[] tmp = H2.GetPlayerDynamic(index / 0x204);
-                if (tmp.Length != 0)
-                    return Mem.ReadInt(false, tmp[0] + 0x46C);
-                return -1;
+                return Mem.ReadInt(false, H2.GetPlayerDynamic(index / 0x204) + 0x46C);
             }
         }
         public float CurrentPlaneAngle
         {
             get
             {
-                int[] tmp = H2.GetPlayerDynamic(index / 0x204);
-                if (tmp.Length != 0)
-                    return Mem.ReadFloat(false, tmp[0] + 0x394);
-                return -1;
+                return Mem.ReadFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x394);
             }
             set
             {
-                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204)[0] + 0x394, value);
+                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x394, value);
             }
         }
         public string SGamerTag
@@ -470,6 +447,9 @@ namespace H2Memory_class
             }
         }
         #endregion
+        /// <summary>
+        /// Overloaded constructor
+        /// </summary>
         public Player(H2Memory  H2, int index)
         {
             this.Mem = H2.H2Mem;
@@ -482,22 +462,23 @@ namespace H2Memory_class
                 else Offset = 0x5057AC;
             }
         }
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Player() { }
         /// <summary>
         /// Forces the player to drop there weapons infinately.
         /// </summary>
         public void TakeWeapons()
         {
-            foreach (int i in H2.GetPlayerDynamic(this.index / 0x204))
-                Mem.WriteMem(i + 24, new byte[] { 0xff, 0xff, 0xff, 0xff }, false);
+            Mem.WriteMem(H2.GetPlayerDynamic(this.index / 0x204) + 24, new byte[] { 0xff, 0xff, 0xff, 0xff }, false);
         }
         /// <summary>
         /// Kills the player without remorse (Troll)
         /// </summary>
         public void KillPlayer()
         {
-            foreach (int i in H2.GetPlayerDynamic(this.index / 0x204))
-                Mem.WriteMem(i + 0x208, new byte[] { 0x01, 0xFE, 0xFE, 0xFF }, false);
+            Mem.WriteMem(H2.GetPlayerDynamic(this.index / 0x204) + 0x208, new byte[] { 0x01, 0xFE, 0xFE, 0xFF }, false);
         }
     }
 }

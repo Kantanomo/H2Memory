@@ -10,6 +10,11 @@ namespace H2Memory_class
     {
         [DllImport("user32.dll")]
         private static extern short GetKeyState(Keys nVirtKey);
+        /// <summary>
+        /// Checks the state of the key
+        /// </summary>
+        /// <param name="key">Key</param>
+        /// <returns>Bool</returns>
         public static bool Keystate(Keys key)
         {
             int keyState = GetKeyState(key);
@@ -19,6 +24,11 @@ namespace H2Memory_class
             }
             return true;
         }
+        /// <summary>
+        /// Checks the state of all keys in the array
+        /// </summary>
+        /// <param name="key">Ky</param>
+        /// <returns>Bool</returns>
         public static bool Keystate(Keys[] ky)
         {
             int i = 0;

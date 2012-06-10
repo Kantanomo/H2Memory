@@ -113,7 +113,7 @@ namespace H2Memory_class
         /// <summary>
         /// Checks if the Process is runnig
         /// </summary>
-        /// <returns></returns>
+        /// <returns>if the process is running</returns>
         public bool CheckProcess()
         {
             return (Process.GetProcessesByName(this.BaseProcessName).Length > 0);
@@ -121,7 +121,6 @@ namespace H2Memory_class
         /// <summary>
         /// Starts The process memory hook
         /// </summary>
-        /// <returns></returns>
         public void StartProcess()
         {
             if (this.BaseProcessName != "")
@@ -148,7 +147,7 @@ namespace H2Memory_class
         /// Trims the given string
         /// </summary>
         /// <param name="mystring">String to trim</param>
-        /// <returns></returns>
+        /// <returns>Trims a string</returns>
         public string TrimString(string mystring)
         {
             char[] chArray = mystring.ToCharArray();
@@ -165,7 +164,7 @@ namespace H2Memory_class
         /// Gets the Base adress of a specified DLL
         /// </summary>
         /// <param name="dllname">DLL name to locate</param>
-        /// <returns></returns>
+        /// <returns>Address to dll base</returns>
         public int DLLBaseAddress(string dllname)
         {
             ProcessModuleCollection modules = this.BaseProcesses[BaseIndex].Modules;
@@ -177,7 +176,7 @@ namespace H2Memory_class
         /// <summary>
         /// Gets the Image Address of a process
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Address to base</returns>
         public int ImageAddress()
         {
             this.BaseAddress[BaseIndex] = 0;
@@ -189,7 +188,7 @@ namespace H2Memory_class
         /// Gets The Image Address of a Process with the given offset
         /// </summary>
         /// <param name="pOffset">Offset</param>
-        /// <returns></returns>
+        /// <returns>Address to offset</returns>
         public int ImageAddress(int pOffset)
         {
             this.BaseAddress[BaseIndex] = 0;
@@ -205,7 +204,7 @@ namespace H2Memory_class
         /// <param name="pOffset">Postion offset to read</param>
         /// <param name="pSize">Amount of Bytes to read</param>
         /// <param name="AddToImageAddress">if add to image address or not</param>
-        /// <returns></returns>
+        /// <returns>Byte Array</returns>
         public byte[] ReadMem(int pOffset, int pSize, bool AddToImageAddress)
         {
             byte[] buffer = new byte[pSize];
@@ -218,7 +217,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="AddToImageAddress">If add to image address or not</param>
         /// <param name="pOffset">Postion offset to read</param>
-        /// <returns></returns>
+        /// <returns>Byte</returns>
         public byte ReadByte(bool AddToImageAddress, int pOffset)
         {
             byte[] buffer = new byte[1];
@@ -226,6 +225,12 @@ namespace H2Memory_class
             else ReadProcessMemory(this.BaseHandle[BaseIndex], pOffset, buffer, 1, 0);
             return buffer[0];
         }
+        /// <summary>
+        /// Reads a Single Byte from the memory
+        /// </summary>
+        /// <param name="AddToImageAddress">If add to image address or not</param>
+        /// <param name="pOffset">Postion offset to read</param>
+        /// <returns>Bool</returns>
         public bool ReadBool(bool Addtoimageadress, int pOffset)
         {
             byte tmp = this.ReadByte(Addtoimageadress, pOffset);
@@ -240,7 +245,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="Module">Module Name</param>
         /// <param name="pOffset">Position Offset</param>
-        /// <returns></returns>
+        /// <returns>Byte</returns>
         public byte ReadByte(string Module, int pOffset)
         {
             byte[] buffer = new byte[1];
@@ -252,7 +257,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="AddToImageAddress">To add to Image adress</param>
         /// <param name="pOffset">Position offset</param>
-        /// <returns></returns>
+        /// <returns>Float</returns>
         public float ReadFloat(bool AddToImageAddress, int pOffset)
         {
             return BitConverter.ToSingle(this.ReadMem(pOffset, 4, AddToImageAddress), 0);
@@ -262,7 +267,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="Module">module name</param>
         /// <param name="pOffset">position offset</param>
-        /// <returns></returns>
+        /// <returns>Float</returns>
         public float ReadFloat(string Module, int pOffset)
         {
             return BitConverter.ToSingle(this.ReadMem(this.DLLBaseAddress(Module) + pOffset, 4, false), 0);
@@ -272,7 +277,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="AddToImageAddress">To add to Image adress</param>
         /// <param name="pOffset">Position offset</param>
-        /// <returns></returns>
+        /// <returns>Double</returns>
         public double ReadDouble(bool AddToImageAddress, int pOffset)
         {
             return BitConverter.ToDouble(this.ReadMem(pOffset, 8, AddToImageAddress), 0);
@@ -282,7 +287,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="Module">module name</param>
         /// <param name="pOffset">position offset</param>
-        /// <returns></returns>
+        /// <returns>Double</returns>
         public double ReadDouble(string Module, int pOffset)
         {
             return BitConverter.ToDouble(this.ReadMem(this.DLLBaseAddress(Module) + pOffset, 4, false), 0);
@@ -302,7 +307,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="Module">Module Name</param>
         /// <param name="pOffset">Position offset</param>
-        /// <returns></returns>
+        /// <returns>Int</returns>
         public int ReadInt(string Module, int pOffset)
         {
             return BitConverter.ToInt32(this.ReadMem(this.DLLBaseAddress(Module) + pOffset, 4, false), 0);
@@ -312,7 +317,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="AddToImageAddress">To add to image adress or not</param>
         /// <param name="pOffset">Position offset</param>
-        /// <returns></returns>
+        /// <returns>Short</returns>
         public short ReadShort(bool AddToImageAddress, int pOffset)
         {
             return BitConverter.ToInt16(this.ReadMem(pOffset, 2, AddToImageAddress), 0);
@@ -332,7 +337,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="AddToImageAddress">To add to image adress or not</param>
         /// <param name="pOffset">Position offset</param>
-        /// <returns></returns>
+        /// <returns>String</returns>
         public string ReadStringAscii(bool AddToImageAddress, int pOffset, int pSize)
         {
             return this.TrimString(Encoding.ASCII.GetString(this.ReadMem(pOffset, pSize, AddToImageAddress)));
@@ -342,7 +347,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="Module">Module Name</param>
         /// <param name="pOffset">Position offset</param>
-        /// <returns></returns>
+        /// <returns>String</returns>
         public string ReadStringAscii(string Module, int pOffset, int pSize)
         {
             return this.TrimString(Encoding.ASCII.GetString(this.ReadMem(this.DLLBaseAddress(Module) + pOffset, pSize, false)));
@@ -352,7 +357,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="AddToImageAddress">To add to image adress or not</param>
         /// <param name="pOffset">Position offset</param>
-        /// <returns></returns>
+        /// <returns>String</returns>
         public string ReadStringUnicode(bool AddToImageAddress, int pOffset, int pSize)
         {
             return this.TrimString(Encoding.Unicode.GetString(this.ReadMem(pOffset, pSize, AddToImageAddress)));
@@ -362,7 +367,7 @@ namespace H2Memory_class
         /// </summary>
         /// <param name="Module">Module Name</param>
         /// <param name="pOffset">Position offset</param>
-        /// <returns></returns>
+        /// <returns>String</returns>
         public string ReadStringUnicode(string Module, int pOffset, int pSize)
         {
             return this.TrimString(Encoding.Unicode.GetString(this.ReadMem(this.DLLBaseAddress(Module) + pOffset, pSize, false)));
