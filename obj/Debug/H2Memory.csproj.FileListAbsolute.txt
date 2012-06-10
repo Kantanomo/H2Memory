@@ -1,0 +1,32 @@
+C:\Users\mickenzie\Documents\Visual Studio 2010\Projects\H2Memory\H2Memory\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\mickenzie\Documents\Visual Studio 2010\Projects\H2Memory\H2Memory\bin\Debug\H2Memory.dll
+C:\Users\mickenzie\Documents\Visual Studio 2010\Projects\H2Memory\H2Memory\bin\Debug\H2Memory.pdb
+C:\Users\mickenzie\Documents\Visual Studio 2010\Projects\H2Memory\H2Memory\obj\Debug\H2Memory.dll
+C:\Users\mickenzie\Documents\Visual Studio 2010\Projects\H2Memory\H2Memory\obj\Debug\H2Memory.pdb
+H:\not school stuff\H2Memory\H2Memory\bin\Debug\H2Memory.dll
+H:\not school stuff\H2Memory\H2Memory\bin\Debug\H2Memory.pdb
+H:\not school stuff\H2Memory\H2Memory\obj\Debug\ResolveAssemblyReference.cache
+H:\not school stuff\H2Memory\H2Memory\obj\Debug\H2Memory.dll
+H:\not school stuff\H2Memory\H2Memory\obj\Debug\H2Memory.pdb
+F:\not school stuff\H2Memory\H2Memory\bin\Debug\H2Memory.dll
+F:\not school stuff\H2Memory\H2Memory\bin\Debug\H2Memory.pdb
+F:\not school stuff\H2Memory\H2Memory\obj\Debug\ResolveAssemblyReference.cache
+F:\not school stuff\H2Memory\H2Memory\obj\Debug\H2Memory.dll
+F:\not school stuff\H2Memory\H2Memory\obj\Debug\H2Memory.pdb
+F:\not school stuff\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.DirectInput.dll
+F:\not school stuff\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.dll
+F:\not school stuff\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.xml
+F:\not school stuff\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.DirectInput.xml
+H:\not school stuff\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.DirectInput.dll
+H:\not school stuff\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.dll
+H:\not school stuff\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.DirectInput.xml
+H:\not school stuff\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.xml
+H:\not school stuff\Halo Research\H2Memory\H2Memory\bin\Debug\H2Memory.dll
+H:\not school stuff\Halo Research\H2Memory\H2Memory\bin\Debug\H2Memory.pdb
+H:\not school stuff\Halo Research\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.DirectInput.dll
+H:\not school stuff\Halo Research\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.dll
+H:\not school stuff\Halo Research\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.DirectInput.xml
+H:\not school stuff\Halo Research\H2Memory\H2Memory\bin\Debug\Microsoft.DirectX.xml
+H:\not school stuff\Halo Research\H2Memory\H2Memory\obj\Debug\ResolveAssemblyReference.cache
+H:\not school stuff\Halo Research\H2Memory\H2Memory\obj\Debug\H2Memory.dll
+H:\not school stuff\Halo Research\H2Memory\H2Memory\obj\Debug\H2Memory.pdb
