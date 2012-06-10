@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControllerMouse.cs" />
     <Compile Include="H2Memory.cs" />
     <Compile Include="HaloEnums.cs" />
     <Compile Include="HaloObjects.cs" />
@@ -63,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Notes\Dynamic Object Documentation.txt" />
+    <Content Include="Notes\Text Symbol Values.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
