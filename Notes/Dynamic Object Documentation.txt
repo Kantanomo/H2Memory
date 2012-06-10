@@ -6,4 +6,10 @@ Weapon Specific
 -Can Shoot		:Bool	:224	:NonVisual Sync
 -Ammo Left		:Short	:22A	:Perfect Sync
 -Ammo In clip		:Short	:22C	:Perfect Sync
--Controlling Camer :int :14 :CrashOnChange
+-Controlling Camera :int :14 :CrashOnChange
+
+
+
+Finding What player has weapon out
+	Take the WeaponBase.ControllingCamera() and compare it to a Player.CameraID() if
+Matched then that player is holding that weapon.
