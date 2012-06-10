@@ -648,5 +648,10 @@ namespace H2Memory_class
             set
             { H2.H2Mem.WriteShort(false, Offset + 0x22C, value); }
         }
+        public byte[] ControllingCamera
+        {
+            get
+            { return H2.H2Mem.ReadMem(Offset + 0x14, 4, false); }
+        }
     }
 }

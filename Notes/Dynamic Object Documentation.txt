@@ -6,3 +6,4 @@ Weapon Specific
 -Can Shoot		:Bool	:224	:NonVisual Sync
 -Ammo Left		:Short	:22A	:Perfect Sync
 -Ammo In clip		:Short	:22C	:Perfect Sync
+-Controlling Camer :int :14 :CrashOnChange
