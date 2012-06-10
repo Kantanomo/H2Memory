@@ -485,7 +485,6 @@ namespace H2Memory_class
     public class Map
     {
         private H2Memory H2;
-
         public Map(H2Memory H2)
         {
             this.H2 = H2;
@@ -542,12 +541,11 @@ namespace H2Memory_class
             return string.Empty;
         }
     }
-    #region Camera Stuff
     public class Camera
     {
         private H2Memory H2;
 
-        public void Map(H2Memory H2)
+        public Camera(H2Memory H2)
         {
             this.H2 = H2;
         }
@@ -585,5 +583,4 @@ namespace H2Memory_class
             }
         }
     }
-    #endregion
 }
