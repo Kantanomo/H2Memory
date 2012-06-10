@@ -127,6 +127,8 @@ namespace H2Memory_class
         }
         public string LocalGamertag()
         {
+            if(HType == H2Type.Halo2Vista)
+                return H2Mem.ReadStringUnicode(false, 0x50F7C8, 32);
             if (HType == H2Type.H2server)
                 return H2Mem.ReadStringUnicode(false, 0x52040A, 32);
             return "";
