@@ -528,15 +528,12 @@ namespace H2Memory_class
         public string CurrentMap()
         {
             #region Halo2Vista
-            if (H2.HType == H2Type.Halo2Vista)
-                return H2.H2Mem.ReadStringUnicode(true, 0x47cf0c, 32);
+            if (H2.HType == H2Type.Halo2Vista) return H2.H2Mem.ReadStringUnicode(true, 0x47cf0c, 32);
             #endregion
             #region H2Server
             if (H2.HType == H2Type.H2server)
-                if (H2.MainMenuCheck())
-                    return "mainmenu";
-                else
-                    return H2.H2Mem.ReadStringAscii(true, 0x4A2B74, 32);
+                if (H2.MainMenuCheck())return "mainmenu";
+                else return H2.H2Mem.ReadStringAscii(true, 0x4A2B74, 32);
             #endregion //NEEDS WORK
             return string.Empty;
         }
