@@ -480,6 +480,14 @@ namespace H2Memory_class
         {
             Mem.WriteMem(DynamicObjTable.GetPlayerDynamic(H2,this.index / 0x204) + 0x208, new byte[] { 0x01, 0xFE, 0xFE, 0xFF }, false);
         }
+        public Weapon WeaponOut()
+        {
+            foreach (WeaponBase i in new WeaponSet(H2, Weapon.All))
+            {
+                if (BitConverter.ToInt32(i.ControllingCamera, 0) == BitConverter.ToInt32(CameraID, 0))
+                    return i;
+            }
+        }
     }
 
     public class Map
@@ -518,7 +526,7 @@ namespace H2Memory_class
         {
             if (H2.HType == H2Type.Halo2Vista)
                 H2.H2Mem.WriteInt(false, 0x300056C4, 0);
-            if (H2.HType == H2Type.H2server) // check if correct
+            if (H2.HType == H2Type.H2server)
                 H2.H2Mem.WriteInt(false, 0x30005270, 0);
         }
         /// <summary>
@@ -609,7 +617,7 @@ namespace H2Memory_class
                 {
                     int DynamicBase = H2.H2Mem.ReadInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x3003CF3C : 0x3003CAE8) + (j * 12) + 8);
                     int DynamicS = H2.H2Mem.ReadInt(false, DynamicBase);
-                    if (DynamicS == (int)WeaponClass)
+                    if (DynamicS == (int)WeaponClass || WeaponClass == Weapon.All)
                         Storage.Add(DynamicBase);
                 }
             return Storage;
@@ -620,7 +628,7 @@ namespace H2Memory_class
         public WeaponSet(H2Memory H2, Weapon WeaponClass)
         {
             foreach (int i in DynamicObjTable.GetWeaponSet(H2, WeaponClass))
-                List.Add(new WeaponBase(H2,i,WeaponClass));
+                List.Add(new WeaponBase(H2,i));
         }
     }
     public class WeaponBase
@@ -628,11 +636,11 @@ namespace H2Memory_class
         public Weapon WeaponClass;
         public int Offset;
         private H2Memory H2;
-        public WeaponBase(H2Memory H2, int Offset, Weapon WeaponClass)
+        public WeaponBase(H2Memory H2, int Offset)
         {
             this.Offset = Offset;
-            this.WeaponClass = WeaponClass;
             this.H2 = H2;
+            WeaponClass = (Weapon)H2.H2Mem.ReadInt(false, Offset);
         }
         public short AmmoInClip
         {
