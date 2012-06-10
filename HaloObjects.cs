@@ -620,15 +620,17 @@ namespace H2Memory_class
         public WeaponSet(H2Memory H2, Weapon WeaponClass)
         {
             foreach (int i in DynamicObjTable.GetWeaponSet(H2, WeaponClass))
-                ;
+                List.Add(new WeaponBase(i));
         }
     }
     public class WeaponBase
     {
         public Weapon WeaponClass;
-        public WeaponBase(int Offset)
+        public int Offset;
+        public WeaponBase(int Offset, Weapon WeaponClass)
         {
-
+            this.Offset = Offset;
+            this.WeaponClass = WeaponClass;
         }
     }
 }
