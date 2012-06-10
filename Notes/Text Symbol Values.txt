@@ -1,0 +1,147 @@
+FFFF=::::: KEYBOARD :::::-
+00E0=Wink ;)-
+02E0=Neutral :|-
+01E0=Big Smile :D-
+04E0=Tounge :P-
+0526=Star-
+9126=Flag- # By MasterOmok
+1327=Check-
+1727=X Symbol-
+
+
+FFFF=                                       -
+FFFF=::::: MISCELLANEOUS :::::-
+05E0=Camera-
+06E0=Guest-
+07E0=Downloadable Content-
+08E0=Lock-
+
+
+FFFF=                                       -
+FFFF=::::: INGAME MEDALS :::::-
+33E0=Killing Spree-
+34E0=Running Riot-
+35E0=Rampage-
+36E0=Beserker-
+37E0=Overkill-
+38E0=Double Kill-
+39E0=Triple Kill-
+40E0=Killtacular-
+41E0=Kill Frenzy-
+42E0=Killtrocity-
+43E0=Killamanjaro-
+44E0=Sniper Kill-
+45E0=Roadkill-
+46E0=Bonecracker-
+47E0=Assassin-
+48E0=Stick It-
+49E0=Flag Carrier Kill-
+50E0=Oddball Carrier Kill-
+51E0=Bomb Carrier Kill-
+52E0=(Do Not Enter?)-
+53E0=Carjacking-
+54E0=Flag Taken-
+55E0=Bomb Taken-
+56E0=Flag captured-
+57E0=Bomb Planted-
+58E0=Flag Returned-
+59E0=Bomb Returned-
+60E0=Question Mark-
+
+
+FFFF=                                       -
+FFFF=::::: POSTGAME MEDALS :::::-
+65E0=Killing Spree | P |-
+66E0=Running Riot | P |-
+67E0=Rampage | P |-
+68E0=Beserker | P |-
+69E0=Overkill | P |-
+70E0=Double Kill | P |-
+71E0=Triple Kill | P |-
+72E0=Killtacular | P |-
+73E0=Kill Frenzy | P |-
+74E0=Killtrocity | P |-
+75E0=Killamanjaro | P |-
+76E0=Sniper Kill | P |-
+77E0=Roadkill | P |-
+78E0=Bonecracker | P |-
+79E0=Assassin | P |-
+80E0=Stick It | P |-
+81E0=Carjacking | P |-
+82E0=(Do Not Enter) | P |-
+83E0=Flag Carrier Kill | P |-
+84E0=Oddball Carrier Kill | P |-
+85E0=Bomb Carrier Kill | P |-
+86E0=Flag Taken | P |-
+87E0=Bomb Taken | P |-
+88E0=Flag Captured | P |-
+89E0=Bomb Planted | P |-
+90E0=Flag Returned | P |-
+91E0=Bomb Returned | P |-
+92E0=Large Question Mark | P |-
+
+
+FFFF=                                       -
+FFFF=::::: BUTTONS :::::-
+00E1=A Button-
+01E1=B Button-
+02E1=X Button-
+03E1=Y Button-
+04E1=Black Button-
+05E1=White Button-
+0CE1=Start-
+0DE1=Back-
+06E1=Left Trigger-
+07E1=Right Trigger-
+08E1=Up-
+09E1=Down-
+0AE1=Left-
+0BE1=Right-
+2DE1=Left Thumbstick-
+10E1=Left Thumb Stick (Up)-
+0EE1=Left Thumb Stick (Down)-
+59E4=L Thumbstick (Animated)-
+30E1=Right Thumbstick-
+11E1=Right Thumb Stick (Up)-
+0FE1=Right Thumb Stick (Down)-
+5AE4=R Thumbstick (Animated)-
+
+
+FFFF=                                       -
+FFFF=::::: WEAPONS :::::-
+#  Objective
+16E1=Flag-
+13E1=Bomb-
+1CE1=Oddball-
+#  Human
+1AE1=Magnum-
+22E1=SMG-
+2BE1=SMG (Longer Barrell)-
+12E1=Battle Rifle-
+21E1=Shotgun-
+23E1=Sniper Rifle-
+20E1=Rocket Launcher-
+#  Covy
+1DE1=Plasma Pistol-
+1EE1=Plasma Rifle-
+2AE1=(Brute) Plasma Rifle-
+1BE1=Needler-
+15E1=Carbine-
+14E1=Brute Shot-
+1FE1=Plasma Sword-
+24E1=Beam Rifle-
+17E1=Fuel Rod Gun-
+
+
+FFFF=                                       -
+FFFF=::::: VARIABLES :::::-
+0AE4=Game Name-
+0BE4=Radar "On/Off"-
+0CE4=Team Play "Disabled/Enabled"-
+1FE4=Split Screen/System Link/Xbox Live-
+2DE4=Your Score-
+2EE4=Closest Enemy's Score-
+3AE4=Last Matchmade Game-
+3BE4=Matchmade Disc-
+08E4=Map-
+09E4=Gametype-
