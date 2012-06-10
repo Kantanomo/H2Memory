@@ -544,18 +544,15 @@ namespace H2Memory_class
     public class Camera
     {
         private H2Memory H2;
-
         public Camera(H2Memory H2)
         {
             this.H2 = H2;
         }
-
         public byte GetCameraModifier()
         {
             if (H2.H2Mem.ReadByte(true, 0x4a84b0) != 0xE1 && H2.H2Mem.ReadByte(true, 0x4a84b0) != 0x44)
                 return (byte)(H2.H2Mem.ReadByte(true, 0x4a84b2) + 3);
-            else
-                return (byte)(H2.H2Mem.ReadByte(true, 0x4a84b2));
+            else return (byte)(H2.H2Mem.ReadByte(true, 0x4a84b2));
         }
         public void ThirdPersonCamMode()
         {
