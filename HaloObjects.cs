@@ -293,12 +293,12 @@ namespace H2Memory_class
         {
             get
             {
-                return Mem.ReadInt(false, H2.GetPlayerDynamic(index / 0x204) + 6364);
+                return Mem.ReadInt(false, DynamicObjTable.GetPlayerDynamic(H2, index / 0x204) + 6364);
             }
             set
             {
-                Mem.WriteInt(false, H2.GetPlayerDynamic(index / 0x204) + 6364, value);
-                Mem.WriteInt(false, H2.GetPlayerDynamic(index / 0x204) + 8906, value);
+                Mem.WriteInt(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 6364, value);
+                Mem.WriteInt(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 8906, value);
             }
         }
         /// <summary>
@@ -344,58 +344,58 @@ namespace H2Memory_class
         {
             get
             {
-                return Mem.ReadFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x64);
+                return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x64);
             }
             set
             {
-                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x264, value);
+                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x264, value);
             }
         }
         public float YPos
         {
             get
             {
-                return Mem.ReadFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x68);
+                return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x68);
             }
             set
             {
-                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x268, value);
+                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x268, value);
             }
         }
         public float ZPos
         {
             get
             {
-                return Mem.ReadFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x6C);
+                return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x6C);
             }
             set
             {
-                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x26C, value);
+                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x26C, value);
             }
         }
         public int CurrentPlane
         {
             get
             {
-                return Mem.ReadInt(false, H2.GetPlayerDynamic(index / 0x204) + 0x468);
+                return Mem.ReadInt(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x468);
             }
         }
         public int CurrentPlane2
         {
             get
             {
-                return Mem.ReadInt(false, H2.GetPlayerDynamic(index / 0x204) + 0x46C);
+                return Mem.ReadInt(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x46C);
             }
         }
         public float CurrentPlaneAngle
         {
             get
             {
-                return Mem.ReadFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x394);
+                return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x394);
             }
             set
             {
-                Mem.WriteFloat(false, H2.GetPlayerDynamic(index / 0x204) + 0x394, value);
+                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x394, value);
             }
         }
         public string SGamerTag
@@ -471,14 +471,14 @@ namespace H2Memory_class
         /// </summary>
         public void TakeWeapons()
         {
-            Mem.WriteMem(H2.GetPlayerDynamic(this.index / 0x204) + 24, new byte[] { 0xff, 0xff, 0xff, 0xff }, false);
+            Mem.WriteMem(DynamicObjTable.GetPlayerDynamic(H2,this.index / 0x204) + 24, new byte[] { 0xff, 0xff, 0xff, 0xff }, false);
         }
         /// <summary>
         /// Kills the player without remorse (Troll)
         /// </summary>
         public void KillPlayer()
         {
-            Mem.WriteMem(H2.GetPlayerDynamic(this.index / 0x204) + 0x208, new byte[] { 0x01, 0xFE, 0xFE, 0xFF }, false);
+            Mem.WriteMem(DynamicObjTable.GetPlayerDynamic(H2,this.index / 0x204) + 0x208, new byte[] { 0x01, 0xFE, 0xFE, 0xFF }, false);
         }
     }
 
@@ -578,6 +578,59 @@ namespace H2Memory_class
                 H2.H2Mem.WriteMem(0x4a84b0, new byte[3] { 0x39, 0x80, ((byte)(GetCameraModifier() - 3)) }, true); //set camera state.
                 H2.H2Mem.WriteByte(true, 0x4a84ae, 1);
             }
+        }
+    }
+    public class DynamicObjTable
+    {
+        /// <summary>
+        /// Gets the dynamic player address by index
+        /// </summary>
+        public static int GetPlayerDynamic(H2Memory H2, int index)
+        {
+            #region Halo2Vista
+            if (HType == H2Type.Halo2Vista)
+            {
+                int TempSight = H2.H2Mem.ReadInt(false, 0x30002B44 + (index * 0x204));
+                if (TempSight != -1 && TempSight != 0)
+                    for (int j = 0; j < 2048; j++)
+                    {
+                        int DynamicBase = H2.H2Mem.ReadInt(false, 0x3003CF3C + (j * 12) + 8);
+                        int DynamicS = H2.H2Mem.ReadInt(false, DynamicBase + 0x3F8);
+                        if (DynamicS == TempSight)
+                            return DynamicBase;
+                    }
+            }
+            #endregion
+            #region H2Server
+            if (HType == H2Type.H2server)
+            {
+                int TempSight = H2.H2Mem.ReadInt(false, 0x300026F0 + (index * 0x204));
+                if (TempSight != -1 && TempSight != 0)
+                    for (int j = 0; j < 2048; j++)
+                    {
+                        int DynamicBase = H2.H2Mem.ReadInt(false, 0x3003CAE8 + (j * 12) + 8);
+                        int DynamicS = H2.H2Mem.ReadInt(false, DynamicBase + 0x3F8);
+                        if (DynamicS == TempSight)
+                            return DynamicBase;
+                    }
+            }
+            #endregion
+            return -1;
+        }
+    }
+    public class WeaponSet : System.Collections.CollectionBase, System.Collections.IEnumerable
+    {
+        public WeaponSet(Weapon WeaponClass)
+        {
+
+        }
+    }
+    public class WeaponBase
+    {
+        public Weapon WeaponClass;
+        public WeaponBase(int Offset)
+        {
+
         }
     }
 }

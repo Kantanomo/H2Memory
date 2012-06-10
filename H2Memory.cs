@@ -47,41 +47,6 @@ namespace H2Memory_class
             if (HType == H2Type.H2server) // check if correct
                 H2Mem.WriteInt(false, 0x30005270, 2);
         }
-        /// <summary>
-        /// Gets the dynamic player address by index
-        /// </summary>
-        public int GetPlayerDynamic(int index)
-        {
-            #region Halo2Vista
-            if (HType == H2Type.Halo2Vista)
-            {
-                int TempSight = H2Mem.ReadInt(false, 0x30002B44 + (index * 0x204));
-                if (TempSight != -1 && TempSight != 0)
-                    for (int j = 0; j < 2048; j++)
-                    {
-                        int DynamicBase = H2Mem.ReadInt(false, 0x3003CF3C + (j * 12) + 8);
-                        int DynamicS = H2Mem.ReadInt(false, DynamicBase + 0x3F8);
-                        if (DynamicS == TempSight)
-                            return DynamicBase;
-                    }
-            }
-            #endregion
-            #region H2Server
-            if (HType == H2Type.H2server)
-            {
-                int TempSight = H2Mem.ReadInt(false, 0x300026F0 + (index * 0x204));
-                if (TempSight != -1 && TempSight != 0)
-                    for (int j = 0; j < 2048; j++)
-                    {
-                        int DynamicBase = H2Mem.ReadInt(false, 0x3003CAE8 + (j * 12) + 8);
-                        int DynamicS = H2Mem.ReadInt(false, DynamicBase + 0x3F8);
-                        if (DynamicS == TempSight)
-                            return DynamicBase;
-                    }
-            }
-            #endregion
-            return -1;
-        }
         public int GetPlayerCount()
         {
             #region Halo2Vista
