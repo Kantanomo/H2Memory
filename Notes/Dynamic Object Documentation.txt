@@ -6,6 +6,8 @@ Weapon Specific
 -Can Shoot		:Bool	:224	:NonVisual Sync
 -Ammo Left		:Short	:22A	:Perfect Sync
 -Ammo In clip		:Short	:22C	:Perfect Sync
+-Battery Left	:float :184 :Sync
+-Weapon Heat :float : 180 :No Sync
 -Controlling Camera :int :14 :CrashOnChange
 
 Finding What player has weapon out

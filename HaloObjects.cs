@@ -640,7 +640,7 @@ namespace H2Memory_class
     }
     public class WeaponBase
     {
-        public Weapon WeaponClass;
+        public Weapon WeaponClass = Weapon.None;
         public int Offset;
         private H2Memory H2;
         public WeaponBase()
@@ -665,6 +665,20 @@ namespace H2Memory_class
             { return H2.H2Mem.ReadShort(false, Offset + 0x22C); }
             set
             { H2.H2Mem.WriteShort(false, Offset + 0x22C, value); }
+        }
+        public float BatteryPower
+        {
+            get
+            { return H2.H2Mem.ReadFloat(false, Offset + 0x184); }
+            set
+            { H2.H2Mem.WriteFloat(false, Offset + 0x184, value); }
+        }
+        public float WeaponHeat
+        {
+            get
+            { return H2.H2Mem.ReadFloat(false, Offset + 0x180); }
+            set
+            { H2.H2Mem.WriteFloat(false, Offset + 0x180, value); }
         }
         public byte[] ControllingCamera
         {
