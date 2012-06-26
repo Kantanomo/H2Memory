@@ -45,6 +45,8 @@ local.properties
 *.cache
 *.sln.docstates.suo
 *.suo
+*/bin/
+*/obj/
 
 # Build results
 **/[Dd]ebug/
