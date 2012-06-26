@@ -11,27 +11,24 @@ namespace H2Memory_class
 {
     public static class OpCode
     {
+        private static bool Patched;
         /// <summary>
         /// Patches xlive.dll integrity check
         /// </summary>
         /// <param name="H2">H2Memory Class</param>
         public static void PatchChecks(H2Memory H2)
         {
-            if (!H2.H2Mem.ReadBool(true, ((H2.HType == H2Type.Halo2Vista) ? 0x51A5c8 : 0x520440)))
+            Int32 xliveBase = H2.H2Mem.DLLBaseAddress("xlive.dll");
+            //Thanks to Kiwi who made this code because i couldn't find mine!
+            for (Int32 i = 0; i <= 0x351000; i += 1)
             {
-                Int32 xliveBase = H2.H2Mem.DLLBaseAddress("xlive.dll");
-                //Thanks to Kiwi who made this code because i couldn't find mine!
-                for (Int32 i = 0; i <= 0x351000; i += 1)
+                byte[] Magic = H2.H2Mem.ReadMem(xliveBase + i, 16, false);
+                if (Magic[0] == 0x8b && Magic[1] == 0xec && Magic[2] == 0x83 && Magic[3] == 0xec && Magic[4] == 0x20 && Magic[5] == 0x53 && Magic[6] == 0x56 && Magic[7] == 0x57 && Magic[8] == 0x8d && Magic[9] == 0x45 && Magic[10] == 0xe0 && Magic[11] == 0x33 && Magic[12] == 0xf6 && Magic[13] == 0x50 && Magic[14] == 0xff && Magic[15] == 0x75)//(Magic[15] == 0x74 || Magic[15] == 0x75 || Magic[15] == 0x7F))
                 {
-                    byte[] Magic = H2.H2Mem.ReadMem(xliveBase + i, 16, false);
-                    if (Magic[0] == 0x8b && Magic[1] == 0xec && Magic[2] == 0x83 && Magic[3] == 0xec && Magic[4] == 0x20 && Magic[5] == 0x53 && Magic[6] == 0x56 && Magic[7] == 0x57 && Magic[8] == 0x8d && Magic[9] == 0x45 && Magic[10] == 0xe0 && Magic[11] == 0x33 && Magic[12] == 0xf6 && Magic[13] == 0x50 && Magic[14] == 0xff && (Magic[15] == 0x74 || Magic[15] == 0x75 || Magic[15] == 0x7F))
-                    {
-                        byte[] mBytes = { 0xc2, 0xc, 0x0 };
-                        H2.H2Mem.WriteMem((xliveBase + i) - 3, mBytes, false);
-                        H2.H2Mem.writebool(true, ((H2.HType == H2Type.Halo2Vista) ? 0x51A5c8 : 0x520440), true);
-
-                        break;
-                    }
+                    byte[] mBytes = { 0xc2, 0xc, 0x0 };
+                    H2.H2Mem.WriteMem((xliveBase + i) - 3, mBytes, false);
+                    Patched = true;
+                    break;
                 }
             }
         }
@@ -46,7 +43,7 @@ namespace H2Memory_class
            to
            nop nop nop nop nop nop nop nop nop
           */
-            if (H2.H2Mem.ReadBool(true, ((H2.HType == H2Type.Halo2Vista) ? 0x51A5c8 : 0x520440)))
+            if (Patched)
                 H2.H2Mem.WriteMem(((H2.HType == H2Type.Halo2Vista) ? 0x6AB7f : 0x6A3BA), new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 }, true);
         }
         /// <summary>
@@ -57,7 +54,7 @@ namespace H2Memory_class
         /// <param name="H2">H2Memory Class</param>
         public static void PatchRank(H2Memory H2)
         {
-            if (H2.H2Mem.ReadBool(true, ((H2.HType == H2Type.Halo2Vista) ? 0x51A5c8 : 0x520440)))
+            if (Patched)
                     H2.H2Mem.WriteMem(0x1B2C29, new byte[] { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 }, true);
         }
     }
