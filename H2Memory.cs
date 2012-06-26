@@ -13,12 +13,12 @@ namespace H2Memory_class
     {
         public ProcessMemory H2Mem;
         public H2Type HType;
-        public OpCode OpCodeChanges;
         public bool H2Found = true;
-
         /// <summary>
-        /// Constructor
+        /// Creates a instance of H2Memory
         /// </summary>
+        /// <param name="Type">The H2Type of this instance</param>
+        /// <param name="Message">Show if H2V or H2S were found</param>
         public H2Memory(H2Type Type, bool Message)
         {
             H2Mem = new ProcessMemory(Type);
@@ -34,7 +34,6 @@ namespace H2Memory_class
                 }
             }
             HType = Type;
-            this.OpCodeChanges = new OpCode(this);
         }
 
         /// <summary>
@@ -99,15 +98,11 @@ namespace H2Memory_class
             if (HType == H2Type.H2server)
                 return (GameState)(H2Mem.ReadByte(true, 0x3C40AC));
             #endregion
-            return GameState.unknwon;
+            return GameState.unknown;
         }
         public Player GetPlayer(int index)
         {
-            if (HType == H2Type.Halo2Vista)
-                return new Player(this, index);
-            if (HType == H2Type.H2server)
-                return new Player(this, index);
-            return new Player();
+            return new Player(this, index);
         }
         public int SecondaryMagic()
         {
@@ -127,7 +122,7 @@ namespace H2Memory_class
         }
         public string LocalGamertag()
         {
-            if(HType == H2Type.Halo2Vista)
+            if (HType == H2Type.Halo2Vista)
                 return H2Mem.ReadStringUnicode(false, 0x50F7C8, 32);
             if (HType == H2Type.H2server)
                 return H2Mem.ReadStringUnicode(false, 0x52040A, 32);

@@ -63,7 +63,7 @@ namespace H2Memory_class
         ingame = 3,
         joining = 4,
         matchmaking = 5,
-        unknwon = 0
+        unknown = 0
     }
     public enum H2Type
     {
