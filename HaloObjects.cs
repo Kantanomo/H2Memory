@@ -416,8 +416,8 @@ namespace H2Memory_class
                 if (HType == H2Type.Halo2Vista)
                 {
                     byte[] tmp =  H2.H2Mem.ReadMem(Offset + (0x10c * (index / 0x204)),4,true);
-                    return BitConverter.ToInt32(tmp, 0).ToString("X");
-                    //return tmp[0].ToString() + "." + tmp[1].ToString() + "." + tmp[2].ToString() + "." + tmp[3].ToString();
+                    //return BitConverter.ToInt32(tmp, 0).ToString("X");
+                    return tmp[0].ToString() + "." + tmp[1].ToString() + "." + tmp[2].ToString() + "." + tmp[3].ToString();
                 }
                 if (HType == H2Type.H2server)
                     return "";// H2.H2Mem.ReadInt(true, 0x5321E0 + (0x10c * (index / 0x204)));
