@@ -8,8 +8,8 @@ namespace H2Memory_class
     #region Enums
     public enum Weapon : uint
     {
+        Unknown = 0x2,
         None = 0x1,
-        All = 0x0,
         chaingun_turret = 0xE53D2AD8,
         gauss_turret = 0xE5F02B8B,
         warthog_horn = 0xE6322BCD,

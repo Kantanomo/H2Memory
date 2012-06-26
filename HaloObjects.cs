@@ -609,8 +609,8 @@ namespace H2Memory_class
                 for (int j = 0; j < 2048; j++)
                 {
                     int DynamicBase = H2.H2Mem.ReadInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x3003CF3C : 0x3003CAE8) + (j * 12) + 8);
-                    int DynamicS = H2.H2Mem.ReadInt(false, DynamicBase);
-                    if (DynamicS == (int)WeaponClass || WeaponClass == Weapon.All)
+                    int DynamicC = H2.H2Mem.ReadInt(false, DynamicBase);
+                    if (DynamicC == (int)WeaponClass)
                         Storage.Add(DynamicBase);
                 }
             return Storage.ToArray();
@@ -650,7 +650,7 @@ namespace H2Memory_class
         {
             this.Offset = Offset;
             this.H2 = H2;
-            WeaponClass = (Weapon)H2.H2Mem.ReadInt(false, Offset);
+            try {WeaponClass = (Weapon)H2.H2Mem.ReadInt(false, Offset);} catch(Exception) {WeaponClass = Weapon.Unknown;};
         }
         public short AmmoInClip
         {
