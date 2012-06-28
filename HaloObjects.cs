@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Net;
 namespace H2Memory_class
 {
@@ -348,7 +349,7 @@ namespace H2Memory_class
             }
             set
             {
-                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x264, value);
+                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x64, value);
             }
         }
         public float YPos
@@ -359,7 +360,7 @@ namespace H2Memory_class
             }
             set
             {
-                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x268, value);
+                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x68, value);
             }
         }
         public float ZPos
@@ -370,7 +371,7 @@ namespace H2Memory_class
             }
             set
             {
-                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x26C, value);
+                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x6C, value);
             }
         }
         public int CurrentPlane
@@ -486,18 +487,13 @@ namespace H2Memory_class
         }
     }
 
-    public class Map
+    public static class Map
     {
-        private H2Memory H2;
-        public Map(H2Memory H2)
-        {
-            this.H2 = H2;
-        }
         /// <summary>
         /// Checks if the current map is the mainmenu
         /// </summary>
         /// <returns>Returns true if the map is mainmenu</returns>
-        public bool MainMenuCheck()
+        public static bool MainMenuCheck(H2Memory H2)
         {
             #region Halo2Vista
             if (H2.HType == H2Type.Halo2Vista)
@@ -518,7 +514,7 @@ namespace H2Memory_class
         /// <summary>
         /// Resets the current map to default
         /// </summary>
-        public void ResetMap()
+        public static void ResetMap(H2Memory H2)
         {
             if (H2.HType == H2Type.Halo2Vista)
                 H2.H2Mem.WriteInt(false, 0x300056C4, 0);
@@ -529,14 +525,14 @@ namespace H2Memory_class
         /// Gets the current map
         /// </summary>
         /// <returns>name of the map</returns>
-        public string CurrentMap()
+        public static string CurrentMap(H2Memory H2)
         {
             #region Halo2Vista
             if (H2.HType == H2Type.Halo2Vista) return H2.H2Mem.ReadStringUnicode(true, 0x47cf0c, 32);
             #endregion
             #region H2Server
             if (H2.HType == H2Type.H2server)
-                if (MainMenuCheck()) return "mainmenu";
+                if (MainMenuCheck(H2)) return "mainmenu";
                 else return H2.H2Mem.ReadStringAscii(true, 0x4A2B74, 32);
             #endregion //NEEDS WORK
             return string.Empty;
@@ -581,7 +577,7 @@ namespace H2Memory_class
             }
         }
     }
-    public class DynamicObjTable
+    public static class DynamicObjTable
     {
         /// <summary>
         /// Gets the dynamic player address by index
@@ -589,15 +585,15 @@ namespace H2Memory_class
         public static int GetPlayerDynamic(H2Memory H2, int index)
         {
 
-                int TempSight = H2.H2Mem.ReadInt(false, 0x30002B44 + (index * 0x204));
-                if (TempSight != -1 && TempSight != 0)
-                    for (int j = 0; j < 2048; j++)
-                    {
-                        int DynamicBase = H2.H2Mem.ReadInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x3003CF3C : 0x3003CAE8) + (j * 12) + 8);
-                        int DynamicS = H2.H2Mem.ReadInt(false, DynamicBase + 0x3F8);
-                        if (DynamicS == TempSight)
-                            return DynamicBase;
-                    }
+            int TempSight = H2.H2Mem.ReadInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x30002B44 : 0x300026F0) + (index * 0x204));
+            if (TempSight != -1 && TempSight != 0)
+                for (int j = 0; j < 2048; j++)
+                {
+                    int DynamicBase = H2.H2Mem.ReadInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x3003CF3C : 0x3003CAE8) + (j * 12) + 8);
+                    int DynamicS = H2.H2Mem.ReadInt(false, DynamicBase + 0x3F8);
+                    if (DynamicS == TempSight)
+                        return DynamicBase;
+                }
             return -1;
         }
         /// <summary>
@@ -615,6 +611,18 @@ namespace H2Memory_class
                 }
             return Storage.ToArray();
         }
+        public static int[] GetAllWeapons(H2Memory H2)
+        {
+            List<int> Storage = new List<int>();
+            for (int i = 0; i < 2048; i++)
+            {
+                int DynamicBase = H2.H2Mem.ReadInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x3003CF3C : 0x3003CAE8) + (i * 12) + 8);
+                int DynamicC = H2.H2Mem.ReadInt(false, DynamicBase);
+                if (Regex.IsMatch(((Weapon)DynamicC).ToString(), "[a-zA-Z]"))
+                    Storage.Add(DynamicBase);
+            }
+            return Storage.ToArray();
+        }
         /// <summary>
         /// Gets the WeaponBase that matches the player camera
         /// </summary>
@@ -628,6 +636,13 @@ namespace H2Memory_class
                     return new WeaponBase(H2, DynamicBase);
             }
             return new WeaponBase();
+        }
+        public static int[] GetAllBases(H2Memory H2)
+        {
+            int[] Storage = new int[2048];
+            for (int i = 0; i < 2048; i++)
+                Storage[i] = H2.H2Mem.ReadInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x3003CF3C : 0x3003CAE8) + (i * 12) + 8);
+            return Storage;
         }
     }
     public class WeaponSet : System.Collections.CollectionBase, System.Collections.IEnumerable
