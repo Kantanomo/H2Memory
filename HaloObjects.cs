@@ -246,159 +246,104 @@ namespace H2Memory_class
             }
         }
         /// <summary>
-        /// Gets or Sets the Team of the player instance
+        /// Gets or Sets the Team of the player
         /// </summary>
         public Team PlayerTeam
         {
             get
-            {
-                if (H2.HType == H2Type.Halo2Vista)
-                    return (Team)Mem.ReadByte(false, 0x30002BD8 + index);
-                if (H2.HType == H2Type.H2server)
-                    return (Team)Mem.ReadByte(false, 0x30002784 + index);
-                return Team.Observer;
-            }
+            {return (Team)Mem.ReadByte(false, ((H2.HType == H2Type.Halo2Vista) ? 0x30002BD8 : 0x30002784) + index);}
             set
-            {
-                if (H2.HType == H2Type.Halo2Vista)
-                    Mem.WriteByte(false, 0x30002BD8 + index, (byte)value);
-                if (H2.HType == H2Type.H2server)
-                    Mem.WriteByte(false, 0x30002784 + index, (byte)value);
-            }
+            { Mem.WriteByte(false, ((H2.HType == H2Type.Halo2Vista) ? 0x30002BD8 : 0x30002784) + index, (byte)value); }
         }
         /// <summary>
-        /// Gets or Sets the Handicap level of the player instance
+        /// Gets or Sets the Handicap level of the player
         /// </summary>
         public Handicap PlayerHandicap
         {
             get
-            {
-                if (H2.HType == H2Type.Halo2Vista)
-                    return (Handicap)Mem.ReadByte(false, 0x30002BD9 + index);
-                if (H2.HType == H2Type.H2server)
-                    return (Handicap)Mem.ReadByte(false, 0x30002785 + index);
-                return Handicap.None;
-            }
+            { return (Handicap)Mem.ReadByte(false, ((H2.HType == H2Type.Halo2Vista) ? 0x30002BD9 : 0x30002785) + index); }
             set
-            {
-                if (H2.HType == H2Type.Halo2Vista)
-                    Mem.WriteByte(false, 0x30002BD9 + index, (byte)value);
-                if (H2.HType == H2Type.H2server)
-                    Mem.WriteByte(false, 0x30002785 + index, (byte)value);
-            }   
+            { Mem.WriteByte(false, ((H2.HType == H2Type.Halo2Vista) ? 0x30002BD9 : 0x30002785) + index, (byte)value); }
         }
         /// <summary>
-        /// Gets or Sets the Primary ammo count of the player instance
-        /// </summary>
-        public int PrimaryAmmo
-        {
-            get
-            {
-                return Mem.ReadInt(false, DynamicObjTable.GetPlayerDynamic(H2, index / 0x204) + 6364);
-            }
-            set
-            {
-                Mem.WriteInt(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 6364, value);
-                Mem.WriteInt(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 8906, value);
-            }
-        }
-        /// <summary>
-        /// Gets or Sets the Player Speed of the player instance "Can only be used when OpCode.PatchSpeed() is applied to the game"
+        /// Gets or Sets the Player's Speed"Can only be used when OpCode.PatchSpeed(H2Memory H2) is applied to the game"
         /// </summary>
         public float Speed
-        {
+        {//0x30002BD9 Whats this comment for?
             get
-            {//0x30002BD9
-                if (H2.HType == H2Type.Halo2Vista)
-                    return Mem.ReadFloat(false, 0x30002C9C + index);
-                if (H2.HType == H2Type.H2server)
-                    return Mem.ReadFloat(false, 0x30002848 + index);
-                return -1f;
-            }
+            { return Mem.ReadFloat(false, ((H2.HType == H2Type.Halo2Vista) ? 0x30002C9C : 0x30002848) + index); }
             set
-            {
-                if (H2.HType == H2Type.Halo2Vista)
-                    Mem.WriteFloat(false, 0x30002C9C + index, value);
-                if (H2.HType == H2Type.H2server)
-                    Mem.WriteFloat(false, 0x30002848 + index, value);
-            }
+            { Mem.WriteFloat(false, ((H2.HType == H2Type.Halo2Vista) ? 0x30002C9C : 0x30002848) + index, value); }
         }
+        /// <summary>
+        /// Get
+        /// </summary>
         public float RespawnTimer
         {
             get
-            {
-                if (H2.HType == H2Type.Halo2Vista)
-                    return Mem.ReadFloat(false, 0x30002C64 + index);
-                if (H2.HType == H2Type.H2server)
-                    return Mem.ReadFloat(false, 0x30002810 + index);
-                return -1;
-            }
+            { return Mem.ReadFloat(false, ((H2.HType == H2Type.Halo2Vista) ? 0x30002C64 : 0x30002810) + index); }
             set
-            {
-                if (H2.HType == H2Type.Halo2Vista)
-                    Mem.WriteFloat(false, 0x30002C64 + index, value);
-                if (H2.HType == H2Type.H2server)
-                    Mem.WriteFloat(false, 0x30002810 + index, value);
-            }
+            { Mem.WriteFloat(false, ((H2.HType == H2Type.Halo2Vista) ? 0x30002C64 : 0x30002810) + index, value); }
         }
+        /// <summary>
+        /// Gets or Sets the players X-Axis Position
+        /// </summary>
         public float XPos
         {
             get
-            {
-                return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x64);
-            }
+            { return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2, index / 0x204) + 0x64); }
             set
-            {
-                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x64, value);
-            }
+            { Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2, index / 0x204) + 0x64, value); }
         }
+        /// <summary>
+        /// Gets or Sets the players Y-Axis Position
+        /// </summary>
         public float YPos
         {
             get
-            {
-                return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x68);
-            }
+            {return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x68); }
             set
-            {
-                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x68, value);
-            }
+            { Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x68, value);}
         }
+        /// <summary>
+        /// Gets or Sets the players Z-Axis Postion
+        /// </summary>
         public float ZPos
         {
             get
-            {
-                return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x6C);
-            }
+            {return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x6C);}
             set
-            {
-                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x6C, value);
-            }
+            {  Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x6C, value); }
         }
+        /// <summary>
+        /// Returns a int that has somthing to do with the plane or surface you are standing on.
+        /// </summary>
         public int CurrentPlane
         {
             get
-            {
-                return Mem.ReadInt(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x468);
-            }
+            { return Mem.ReadInt(false, DynamicObjTable.GetPlayerDynamic(H2, index / 0x204) + 0x468); }
         }
+        /// <summary>
+        /// Returns a int that has somthing to do with the plane or surface you are standing on.
+        /// </summary>
         public int CurrentPlane2
         {
             get
-            {
-                return Mem.ReadInt(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x46C);
-            }
+            { return Mem.ReadInt(false, DynamicObjTable.GetPlayerDynamic(H2, index / 0x204) + 0x46C); }
         }
+        /// <summary>
+        /// Returns the angle of standing based on 180º:1f ratio (See Player Data Notes for more details)
+        /// </summary>
         public float CurrentPlaneAngle
         {
             get
-            {
-                return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x394);
-            }
+            { return Mem.ReadFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x394);}
             set
-            {
-                Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x394, value);
-            }
+            { Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x394, value);}
         }
+        /// <summary>
+        /// Returns the players static gamertag, unlike the Dynamic gamertag this can also be the players Profile name.
+        /// </summary>
         public string SGamerTag
         {
             get
@@ -410,6 +355,9 @@ namespace H2Memory_class
                 return "";
             }
         }
+        /// <summary>
+        /// Returns the players IPAdress in IPv4 format Ex. 127.0.0.1
+        /// </summary>
         public string IPAdress
         {
             get
@@ -417,7 +365,6 @@ namespace H2Memory_class
                 if (HType == H2Type.Halo2Vista)
                 {
                     byte[] tmp =  H2.H2Mem.ReadMem(Offset + (0x10c * (index / 0x204)),4,true);
-                    //return BitConverter.ToInt32(tmp, 0).ToString("X");
                     return tmp[0].ToString() + "." + tmp[1].ToString() + "." + tmp[2].ToString() + "." + tmp[3].ToString();
                 }
                 if (HType == H2Type.H2server)
@@ -425,6 +372,9 @@ namespace H2Memory_class
                 return "";
             }
         }
+        /// <summary>
+        /// Returns the the players "Received" PCID (Look at Player Data Notes for Explenation on "Received PCID Vs. Accutal PCID")
+        /// </summary>
         public int PCIdentifier
         {
             get
@@ -436,6 +386,9 @@ namespace H2Memory_class
                 return 0;
             }
         }
+        /// <summary>
+        /// Returns the players "Recived" PCAccount (Look at the Player Data Notes for explenation on "Recived PCA Vs. Acctual PCA")
+        /// </summary>
         public int PCAccount
         {
             get
@@ -516,10 +469,7 @@ namespace H2Memory_class
         /// </summary>
         public static void ResetMap(H2Memory H2)
         {
-            if (H2.HType == H2Type.Halo2Vista)
-                H2.H2Mem.WriteInt(false, 0x300056C4, 0);
-            if (H2.HType == H2Type.H2server)
-                H2.H2Mem.WriteInt(false, 0x30005270, 0);
+            H2.H2Mem.WriteInt(false, ((H2.HType == H2Type.Halo2Vista) ? 0x300056C4 : 0x30005270), 0);
         }
         /// <summary>
         /// Gets the current map
