@@ -313,6 +313,26 @@ namespace H2Memory_class
             return BitConverter.ToInt32(this.ReadMem(this.DLLBaseAddress(Module) + pOffset, 4, false), 0);
         }
         /// <summary>
+        /// Reads a unsigned 4 Byte integer from the memory
+        /// </summary>
+        /// <param name="AddToImageAddress">Add to image Adress</param>
+        /// <param name="pOffset">Postion offset</param>
+        /// <returns></returns>
+        public uint ReadUInt(bool AddToImageAddress, int pOffset)
+        {
+            return BitConverter.ToUInt32(this.ReadMem(pOffset, 4, AddToImageAddress), 0);
+        }
+        /// <summary>
+        /// Reads a unsigned 4 Byte integer from the memory at the specific module
+        /// </summary>
+        /// <param name="Module">Module Name</param>
+        /// <param name="pOffset">Position offset</param>
+        /// <returns>Int</returns>
+        public uint ReadUInt(string Module, int pOffset)
+        {
+            return BitConverter.ToUInt32(this.ReadMem(this.DLLBaseAddress(Module) + pOffset, 4, false), 0);
+        }
+        /// <summary>
         /// Reads a 2 Byte Short from the memory
         /// </summary>
         /// <param name="AddToImageAddress">To add to image adress or not</param>
@@ -331,6 +351,26 @@ namespace H2Memory_class
         public short ReadShort(string Module, int pOffset)
         {
             return BitConverter.ToInt16(this.ReadMem(this.DLLBaseAddress(Module) + pOffset, 2, false), 0);
+        }
+        /// <summary>
+        /// Reads a unsigned 2 Byte Short from the memory
+        /// </summary>
+        /// <param name="AddToImageAddress">To add to image adress or not</param>
+        /// <param name="pOffset">Position offset</param>
+        /// <returns>Short</returns>
+        public ushort ReadUShort(bool AddToImageAddress, int pOffset)
+        {
+            return BitConverter.ToUInt16(this.ReadMem(pOffset, 2, AddToImageAddress), 0);
+        }
+        /// <summary>
+        /// Reads a unsigned 2 Byte Short from the memory at the specific module
+        /// </summary>
+        /// <param name="Module">Module Name</param>
+        /// <param name="pOffset">Position offset</param>
+        /// <returns></returns>
+        public ushort ReadUShort(string Module, int pOffset)
+        {
+            return BitConverter.ToUInt16(this.ReadMem(this.DLLBaseAddress(Module) + pOffset, 2, false), 0);
         }
         /// <summary>
         /// Reads a ASCII String from the memory
@@ -372,6 +412,14 @@ namespace H2Memory_class
         {
             return this.TrimString(Encoding.Unicode.GetString(this.ReadMem(this.DLLBaseAddress(Module) + pOffset, pSize, false)));
         }
+        public long ReadLong(bool AddToImageAddress, int pOffset)
+        {
+            return BitConverter.ToInt64(this.ReadMem(pOffset, 8, AddToImageAddress), 0);
+        }
+        public long ReadLong(string Module, int pOffset)
+        {
+            return BitConverter.ToInt64(this.ReadMem(DLLBaseAddress(Module) + pOffset, 4, false), 0);
+        }
         #endregion
         #region write memory
         public void WriteMem(int pOffset, byte[] pBytes, bool AddToImageAddress)
@@ -393,6 +441,14 @@ namespace H2Memory_class
             this.WriteMem(pOffset, BitConverter.GetBytes(pBytes), addtoimageadress);
         }
         public void WriteShort(string Module, int pOffset, short pBytes)
+        {
+            this.WriteMem(this.DLLBaseAddress(Module) + pOffset, BitConverter.GetBytes(pBytes), false);
+        }
+        public void WriteUShort(bool addtoimageadress, int pOffset, ushort pBytes)
+        {
+            this.WriteMem(pOffset, BitConverter.GetBytes(pBytes), addtoimageadress);
+        }
+        public void WriteUShort(string Module, int pOffset, ushort pBytes)
         {
             this.WriteMem(this.DLLBaseAddress(Module) + pOffset, BitConverter.GetBytes(pBytes), false);
         }
@@ -420,6 +476,14 @@ namespace H2Memory_class
         {
             this.WriteMem(this.DLLBaseAddress(Module) + pOffset, BitConverter.GetBytes(pBytes), false);
         }
+        public void WriteUInt(bool AddToImageAddress, int pOffset, uint pBytes)
+        {
+            this.WriteMem(pOffset, BitConverter.GetBytes(pBytes), AddToImageAddress);
+        }
+        public void WriteUInt(string Module, int pOffset, uint pBytes)
+        {
+            this.WriteMem(this.DLLBaseAddress(Module) + pOffset, BitConverter.GetBytes(pBytes), false);
+        }
         public void WriteFloat(bool AddToImageAddress, int pOffset, float pBytes)
         {
             this.WriteMem(pOffset, BitConverter.GetBytes(pBytes), AddToImageAddress);
@@ -442,7 +506,15 @@ namespace H2Memory_class
         }
         public void WriteByte(string Module, int pOffset, byte pBytes)
         {
-            this.WriteMem(this.DLLBaseAddress(Module) + pOffset, BitConverter.GetBytes((byte)pBytes), false);
+            this.WriteMem(this.DLLBaseAddress(Module) + pOffset, new byte[]{pBytes}, false);
+        }
+        public void WriteLong(bool AddToImageAddress, int pOffset, long pBytes)
+        {
+            this.WriteMem(pOffset, BitConverter.GetBytes(pBytes), AddToImageAddress);
+        }
+        public void WriteLong(string Module, int pOffset, long pBytes)
+        {
+            this.WriteMem(DLLBaseAddress(Module), BitConverter.GetBytes(pBytes), false);
         }
         #endregion
         #region Pointers

@@ -6,6 +6,15 @@ using System.Text;
 namespace H2Memory_class
 {
     #region Enums
+    public enum BipedState : byte
+    {
+        Frozen = 0x00,
+        Normal = 0x01,
+        Frozen2 = 0x02,
+        Dead = 0x03,
+        frozen3 = 0x04,
+        frozen4 = 0x05
+    }
     public enum Weapon : uint
     {
         Unknown = 0x2,

@@ -107,7 +107,8 @@ namespace H2Memory_class
         public int SecondaryMagic()
         {
             if (HType == H2Type.Halo2Vista)
-                return H2Mem.ReadInt(false, H2Mem.ReadInt(false, H2Mem.Pointer(true, 0x479e70, 0x13c4008)) + 8) - (H2Mem.Pointer(true, 0x479e70, 0x13c4000) + H2Mem.ReadInt(true, 0x47cd7c));
+                return -(H2Mem.ReadInt(true, 0x47CD54));
+               //OLD: return H2Mem.ReadInt(false, H2Mem.ReadInt(false, H2Mem.Pointer(true, 0x479e70, 0x13c4008)) + 8) - (H2Mem.Pointer(true, 0x479e70, 0x13c4000) + H2Mem.ReadInt(true, 0x47cd7c));
             if (HType == H2Type.H2server)
                 return H2Mem.ReadInt(false, H2Mem.ReadInt(false, H2Mem.Pointer(true, 0x4A642C, 0x13c4008)) + 8) - (H2Mem.Pointer(true, 0x4A642C, 0x13c4000) + H2Mem.ReadInt(true, 0x4A29E4));
             return -1;

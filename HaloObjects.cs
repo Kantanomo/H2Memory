@@ -341,6 +341,13 @@ namespace H2Memory_class
             set
             { Mem.WriteFloat(false, DynamicObjTable.GetPlayerDynamic(H2,index / 0x204) + 0x394, value);}
         }
+        public BipedState BipedState
+        {
+            get
+            { return (BipedState)Mem.ReadByte(false, DynamicObjTable.GetPlayerDynamic(H2, index / 0x204) + 0x3F4);}
+            set
+            { Mem.WriteByte(false, DynamicObjTable.GetPlayerDynamic(H2, index / 0x204) + 0x3F4, (byte)value); }
+        }
         /// <summary>
         /// Returns the players static gamertag, unlike the Dynamic gamertag this can also be the players Profile name.
         /// </summary>
@@ -478,7 +485,7 @@ namespace H2Memory_class
         public static string CurrentMap(H2Memory H2)
         {
             #region Halo2Vista
-            if (H2.HType == H2Type.Halo2Vista) return H2.H2Mem.ReadStringUnicode(true, 0x47cf0c, 32);
+            if (H2.HType == H2Type.Halo2Vista) return H2.H2Mem.ReadStringAscii(true, 0x47cf0c, 32);
             #endregion
             #region H2Server
             if (H2.HType == H2Type.H2server)
