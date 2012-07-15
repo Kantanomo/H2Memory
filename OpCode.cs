@@ -39,7 +39,7 @@ namespace H2Memory_class
         /// </summary>
         public static void PatchAmmo(H2Memory H2)
         {
-            //if (Patched)
+            if (Patched)
             /*
             mov [ecx+06],ax
             to
