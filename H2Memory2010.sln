@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H2Memory", "H2Memory.csproj", "{45C11D81-EBCB-438D-BD85-E87418EBF981}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H2Memory_Tests", "..\H2Memory_Test\H2Memory_Tests.csproj", "{821572DC-4A87-4A1F-B8ED-BCE195960D94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,10 @@ Global
 		{45C11D81-EBCB-438D-BD85-E87418EBF981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45C11D81-EBCB-438D-BD85-E87418EBF981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45C11D81-EBCB-438D-BD85-E87418EBF981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821572DC-4A87-4A1F-B8ED-BCE195960D94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821572DC-4A87-4A1F-B8ED-BCE195960D94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821572DC-4A87-4A1F-B8ED-BCE195960D94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821572DC-4A87-4A1F-B8ED-BCE195960D94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
